@@ -31,8 +31,7 @@ class PatientAPIController:
     Status code should be 200 if the operation was successful,
     Status code should be 400 if there was a client error,
     """
-
-    # Do we have to just use input() thing here?
+    
     def create_patient(self):
         result = self.patient_db.insert_patient(request.get_json())
         status = 200
@@ -47,25 +46,33 @@ class PatientAPIController:
         status = 200
         if result == None:
             status = 400
-        return jsonify({"result": result}), status
 
+        return jsonify({"result": result}), status
+    
+    # Error 500 if the patient is not in the database
     def get_patient(self, patient_id):
         result = self.patient_db.select_patient(patient_id)
+        status = 200
         if result == None:
-            return jsonify({"message": "an error occured"}), 400
-        else:
-            return jsonify({"patient": result}), 200
+            status = 400
+
+        return jsonify({"result": result}), status
 
     def update_patient(self, patient_id):
-        response = self.patient_db.update_patient(patient_id, request.get_json())
-        if response == None:
-            return jsonify({"message": "an error occured"}), 400
-        else:
-            return jsonify({"message": "patient updated successfully"}), 200
+        result = self.patient_db.update_patient(patient_id, request.get_json())
+        status = 200
+        if result == None:
+            status = 400
+        
+        return jsonify({"result": result}), status
 
     def delete_patient(self, patient_id):
-        response = self.patient_db.delete_patient(patient_id)
-        return "something"
+        result = self.patient_db.delete_patient(patient_id)
+        status = 200
+        if result == None:
+            status = 400
+
+        return jsonify({"result": result}), status
 
     def run(self):
         """
