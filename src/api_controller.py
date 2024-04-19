@@ -1,6 +1,6 @@
 """Patient API Controller"""
 
-from flask import Flask
+from flask import Flask, request, jsonify
 from patient_db import PatientDB
 
 
@@ -32,20 +32,40 @@ class PatientAPIController:
     Status code should be 400 if there was a client error,
     """
 
+    # Do we have to just use input() thing here?
     def create_patient(self):
-        pass
+        result = self.patient_db.insert_patient(request.get_json())
+        status = 200
+        if result == None:
+            status = 400
+            return jsonify({"result": None}), status
+        
+        return jsonify({"result": result[0]}), status
 
     def get_patients(self):
-        pass
+        result = self.patient_db.select_all_patients()
+        status = 200
+        if result == None:
+            status = 400
+        return jsonify({"result": result}), status
 
     def get_patient(self, patient_id):
-        pass
+        result = self.patient_db.select_patient(patient_id)
+        if result == None:
+            return jsonify({"message": "an error occured"}), 400
+        else:
+            return jsonify({"patient": result}), 200
 
     def update_patient(self, patient_id):
-        pass
+        response = self.patient_db.update_patient(patient_id, request.get_json())
+        if response == None:
+            return jsonify({"message": "an error occured"}), 400
+        else:
+            return jsonify({"message": "patient updated successfully"}), 200
 
     def delete_patient(self, patient_id):
-        pass
+        response = self.patient_db.delete_patient(patient_id)
+        return "something"
 
     def run(self):
         """

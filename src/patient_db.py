@@ -5,7 +5,6 @@ from sqlalchemy.sql import operators
 from sqlalchemy import select
 from patient_db_config import PATIENTS_TABLE, ENGINE
 
-
 class PatientDB:
     """
     A class representing a patient database.

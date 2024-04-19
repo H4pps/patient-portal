@@ -16,3 +16,32 @@ Validation should be done for all of the variables in config and db_config.
 
 There should be a method to commit that patient to the database using the api_controller.
 """
+
+# import config
+# import patient_db
+
+# import datetime
+# import random
+# import uuid
+
+# class Patient:
+#     def __init__(self, name: str, gender: str, age):
+#         self.patient_id = uuid.uuid4()
+#         self.patient_name = name
+#         self.patient_age = age
+#         self.patient_gender = gender
+#         self.patient_checkin = datetime.datetime.now()
+#         self.patient_checkout = None
+#         self.patient_ward = None
+#         self.patient_room = None
+
+#     def updateRoomAndWard(self, room, ward):
+#         if room in config.ROOM_NUMBERS and ward in config.WARD_NUMBERS and (room // 10) == ward:
+#             self.patient_room = room
+#             self.patient_ward = ward
+#             return True
+#         else:
+#             return False
+        
+#     def commitPatient(self):
+#         pass
