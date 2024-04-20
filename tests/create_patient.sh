@@ -1,6 +1,6 @@
 #!/bin/bash
 
-request_payload_path="payloads/create_patients.json"
+request_payload_path="payloads/create_patients4.json"
 
 payload=$(cat "$request_payload_path")
 

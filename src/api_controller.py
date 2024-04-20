@@ -47,6 +47,11 @@ class PatientAPIController:
         if result == None:
             status = 400
 
+        if request.args.get("search_name") != None:
+            for i in range(len(result) - 1,  -1, -1):
+                if (result[i]["patient_name"] != request.args.get("search_name")):
+                    del result[i]
+
         return jsonify({"result": result}), status
     
     # Error 500 if the patient is not in the database
