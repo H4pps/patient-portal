@@ -85,5 +85,5 @@ class PatientAPIController:
         """
         self.app.run()
 
-
-PatientAPIController()
+if __name__ == "__main__":
+    APIController = PatientAPIController()
